@@ -48,4 +48,21 @@ function render() {
 </script>
 
 </body>
+  <hr>
+<h3>保存した単語</h3>
+<ul id="list"></ul>
+
+<script>
+function renderList() {
+  const ul = document.getElementById("list");
+  ul.innerHTML = "";
+  Object.keys(saved).forEach(w => {
+    const li = document.createElement("li");
+    li.textContent = w;
+    ul.appendChild(li);
+  });
+}
+renderList();
+</script>
+
 </html>
