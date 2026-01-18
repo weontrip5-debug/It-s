@@ -80,3 +80,30 @@ function quiz() {
     `この単語の意味を思い出してね： ${w}`;
 }
 </script>
+<hr>
+<h3>クイズ</h3>
+<button onclick="quiz()">クイズ開始</button>
+<p id="quiz"></p>
+<button id="showAnswer" onclick="showAnswer()" style="display:none;">答えを表示</button>
+
+<script>
+let currentWord = null;
+
+function quiz() {
+  const words = Object.keys(saved);
+  if (words.length === 0) {
+    alert("まず単語を保存してください");
+    return;
+  }
+  currentWord = words[Math.floor(Math.random() * words.length)];
+  document.getElementById("quiz").textContent = `この単語の意味は？: ${currentWord}`;
+  document.getElementById("showAnswer").style.display = "inline";
+}
+
+function showAnswer() {
+  // 今は簡易版として単語をそのまま答えに表示
+  // 翻訳や意味を自分で覚えておく想定
+  document.getElementById("quiz").textContent = `答え: ${currentWord}`;
+  document.getElementById("showAnswer").style.display = "none";
+}
+</script>
