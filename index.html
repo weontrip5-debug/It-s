@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language Reader</title>
+<style>
+body { font-family: system-ui; padding: 1rem; line-height: 1.8; }
+.word { cursor: pointer; }
+.saved { background: #ffeaa7; }
+</style>
+</head>
+<body>
+
+<h2>文章を貼り付け</h2>
+<textarea id="input" rows="6" style="width:100%;"></textarea>
+<button onclick="render()">読む</button>
+
+<hr>
+
+<div id="text"></div>
+
+<script>
+const saved = JSON.parse(localStorage.getItem("words") || "{}");
+
+function render() {
+  const text = document.getElementById("input").value;
+  const words = text.split(/(\s+)/);
+  const container = document.getElementById("text");
+  container.innerHTML = "";
+
+  words.forEach(w => {
+    if (w.trim() === "") {
+      container.append(w);
+    } else {
+      const span = document.createElement("span");
+      span.textContent = w;
+      span.className = "word" + (saved[w] ? " saved" : "");
+      span.onclick = () => {
+        saved[w] = true;
+        localStorage.setItem("words", JSON.stringify(saved));
+        span.classList.add("saved");
+      };
+      container.append(span);
+    }
+  });
+}
+</script>
+
+</body>
+</html>
