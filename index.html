@@ -66,3 +66,17 @@ renderList();
 </script>
 
 </html>
+<hr>
+<h3>復習</h3>
+<button onclick="quiz()">クイズ出題</button>
+<p id="quiz"></p>
+
+<script>
+function quiz() {
+  const words = Object.keys(saved);
+  if (words.length === 0) return;
+  const w = words[Math.floor(Math.random() * words.length)];
+  document.getElementById("quiz").textContent =
+    `この単語の意味を思い出してね： ${w}`;
+}
+</script>
